@@ -51,4 +51,6 @@ def delete(sno):
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()  # ✅ Ensures DB and table are created before running
     app.run(debug=True, port=8000)
