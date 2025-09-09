@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container my-3">
+    <h2>Add a Todo</h2>
+    <form action="/" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">Description</label>
+            <input type="text" class="form-control" name="desc" id="desc" required>
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+</div>
+
+<div class="container my-3">
+    <h2>Your Todos</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in alltodo %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.desc }}</td>
+                <td>{{ todo.date_created.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+                <td>
+                    <a href="/update/{{ todo.sno }}" class="btn btn-sm btn-outline-primary">Update</a>
+                    <a href="/delete/{{ todo.sno }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
